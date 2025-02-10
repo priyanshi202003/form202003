@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registration Form</title>
+        <link rel="stylesheet" type="text/css" href="form.css" />
+        <
+    </head>
+    
+    <body>
+        <div class="container">
+              
+            <div class="row col-md-6 col-md-offset-3">
+                <div class="panel-primary">
+                    <div class="panel-heading">
+                        <h1>Registration Form</h1>
+                    </div>
+                    <div class="panel-body">
+                        
+                <form name="Regform" id="Regform" action="form.php" method="POST" onsubmit="return validateForm()">
+                            <div class="form-group">
+                                <label for="FirstName">First Name</label><br>
+                                <input type="text" class="form-control" id="FirstName" name="FirstName" required>
+                                <div id="FirstNameError" class="error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="LastName">Last Name</label><br>
+                                <input type="text" class="form-control" id="LastName" name="LastName" required>
+                                <div id="LastNameError" class="error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender</label><br>
+                                <div class="options">
+                                   
+                                    <input type="radio" name="gender" id="male" value="m">Male<br>
+                                    
+                                    <input type="radio" name="gender" id="female" value="f">Female<br>
+                                    
+                                    <input type="radio" name="gender" id="others" value="o">Others<br>
+                                    
+                                </div>
+                                <div id="genderError" class="error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label><br>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                                <div id="emailError" class="error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label><br>
+                                <input type="password" class="form-control" id="password" name="password" minlength="6" required>
+                                <div id="passwordError" class="error"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="number">Phone Number</label><br>
+                                <input type="number" class="form-control" id="number" name="number"  maxlength="10" required>
+                                <div id="numberError" class="error"></div>
+                            </div>
+                            <input type="submit" class="btn-primary" value="Submit">
+                            
+                           
+                        </form>
+                       
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+         <script>
+        function validateForm(){
+            const FirstName = document.getElementById("FirstName").value;
+            const LastName = document.getElementById("LastName").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const number = document.getElementById("number").value;
+            const gender = document.querySelector('input[name="gender"]:checked');
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            const characters=/^[a-zA-Z]{6,}$/;
+            document.getElementById('FirstNameError').innerHTML = '';
+            document.getElementById('LastNameError').innerHTML = '';
+            document.getElementById('emailError').innerHTML = '';
+            document.getElementById('passwordError').innerHTML = '';
+            document.getElementById('numberError').innerHTML = '';
+            document.getElementById('genderError').innerHTML = '';
+            
+            
+        
+            if (FirstName === "" || !characters.test(FirstName)) {
+                document.getElementById('FirstNameError').innerHTML =
+                    "Please enter your Firstname properly.It must contain only alphabets and be at least 6 characters long.";
+                return false;
+            }
+            if (LastName ==="") {
+                document.getElementById('LastNameError').innerHTML =
+                    "Please enter your Lastname properly.";
+                return false;
+            }
+        
+            if (email === "" || !emailPattern.test(email)) {
+                document.getElementById('emailError').innerHTML =
+                    "Please enter a valid email address.";
+                return false;
+            }
+        
+            if ( password.length < 6) {
+                document.getElementById('passwordError').innerHTML =
+                    "Please enter a password with at least 6 characters.";
+                return false;
+            }
+        
+            if ( !gender) {
+                document.getElementById('genderError').innerHTML =
+                    "Please select your gender.";
+                return false;
+            }
+            if (isNaN(number) || number.length !==10) {
+                document.getElementById('numberError').innerHTML =
+                    "Please enter a valid phone number.";
+                return false;
+            }
+        
+        
+        
+            return true;
+        
+        }
+        </script>
+    </body>
+</html>
